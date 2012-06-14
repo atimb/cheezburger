@@ -39,10 +39,13 @@ $(document).ready(function() {
     // Bind touch/click events to buttons
     (function bindHandlers() {
         $('.burger').bind('touchend', showSubmitScore);
-        $('#play').bind('click', showInGame);
+        $('#play').bind('touchend', showInGame);
         $('#replay').bind('touchend', showInGame);
         $('#submit').bind('touchend', function() {
             $('#submit').attr('disabled', 'disabled');
+            if ($('#nickname').val() === '') {
+                $('#nickname').val('anonymous');
+            }
             $.post('/api/score', { location: $('#location').val(), nickname: $('#nickname').val(), points: points }, function(res) {
                 showHighScore();
             });
@@ -61,7 +64,7 @@ $(document).ready(function() {
     function startGame() {
     
         var lastTime = 0;
-        var nextBurger = 0;
+        var nextBurger = 1500;
         var burgerId = 0;
         var burgerz = [];
         var lives = 5;
@@ -79,7 +82,7 @@ $(document).ready(function() {
                 // new burger pops up
                 burgerz.push({ x: Math.random()*260, y: -50, vx: 0, vy: 0, m: 0.5 + Math.random(), id: burgerId });
                 $('<img id="burger-' + burgerId++ + '" src="img/burger.png" class="burger"/>').appendTo('#ingame');
-                nextBurger = Math.random()*2000 + 1000;
+                nextBurger = Math.random()*2000 + 500;
             }
         }
 
@@ -157,8 +160,8 @@ $(document).ready(function() {
                 // Sort according to GPS coord distance to user
                 if (position) {
                     locations.sort(function(a, b) {
-                        var distA = Math.pow(a.lat - position.lat, 2) + Math.pow(a.long - position.long, 2);
-                        var distB = Math.pow(b.lat - position.lat, 2) + Math.pow(b.long - position.long, 2);
+                        var distA = Math.pow(a.lat - position.latitude, 2) + Math.pow(a.long - position.longitude, 2);
+                        var distB = Math.pow(b.lat - position.latitude, 2) + Math.pow(b.long - position.longitude, 2);
                         return distA - distB;
                     });
                 }
@@ -168,8 +171,8 @@ $(document).ready(function() {
             }
             // Try to get physical coordinates
             if (typeof(navigator.geolocation.getCurrentPosition) === 'function' && !position) {
-                navigator.geolocation.getCurrentPosition(function(position){
-                    position = position.coords;
+                navigator.geolocation.getCurrentPosition(function(pos){
+                    position = pos.coords;
                     fillSelect();
                 });
             } else {
