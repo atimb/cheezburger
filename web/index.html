@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    	<meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    	<title>Cheezburger</title>
+        <link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet/less" type="text/css" href="css/style.less">
+        <script type="text/javascript" src="js/less-1.2.1.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/base.js"></script>
+    </head>
+    <body>
+
+        <div id="banner" class="banner" style="display: one">
+            <h3 style="margin-top: 5px">CAN I HAS</h3>
+            <h1>Cheezburger?</h1>
+            <img src="img/cat.png" />
+            <br />
+            <input id="play" type="button" value="PLAY !" style="margin-top: 10px;"/>
+            <h3 id="add" style="display: none"><span>To Play:</span><br/>Click below &amp; "Add to Home Screen"<br/>&dArr;</h3>
+        </div>
+
+        <div id="ingame" class="ingame" style="display: none">
+            <h1 id="points">Score: 1500</h1>
+            <h1 id="lives">Lives: 5</h1>
+            <img class="cat" src="img/cat.png" />
+        </div>
+        
+        <div id="submitscore" class="submitscore" style="display: none">
+            <h1 id="score" style="margin-top: 30px"></h1>
+            <h3 style="margin-top: 50px">Select store location</h3>
+            <select id="location"/></select>
+            <h3 style="margin-top: 50px">Enter your nickname</h3>
+            <input id="nickname" type="text" value="" />
+            <br />
+            <input id="submit" type="button" value="SUBMIT !" style="margin-top: 50px" />
+        </div>
+        
+        <div id="highscore" class="highscore" style="display: none">
+            <h1  style="margin-top: 20px" >High Score</h1>
+            <h3 id="highscorefor"></h3>
+            <div id="highscores"></div>
+            <input id="replay" type="button" value="TRY AGAIN !" style="margin-top: 50px" />
+        </div>
+        
+    </body>
+</html>

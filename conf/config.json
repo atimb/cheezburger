@@ -1,0 +1,9 @@
+{
+    "SALESFORCE": {
+        "clientId": "",
+        "clientSecret": "",
+        "redirectUri": "",
+        "username": "",
+        "passwordAndToken": ""
+    }
+}

@@ -1,0 +1,216 @@
+body, div, span, p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+section, article, footer {
+    display: block;
+}
+
+body {
+    background-image: url('../img/red-bg.jpg');
+    .background-size(cover);
+    font-size: 15px;
+    overflow: hidden;
+    text-align: center;
+
+    h1 {
+        font-family: 'Bangers';
+        text-shadow: 1px 2px #000;
+        color: #ffa;
+        font-size: 50px;
+    }
+    
+    h3 {
+        font-size: 15px;
+        color: #ff5;
+    }
+    
+    input {
+        background-color: rgb(198,90,88);
+        .linear-gradient(top, rgb(198,90,88) 0%, rgb(187,56,52) 100%);
+        .border-radius(10px);
+        color: #fff;
+        border: 3px solid rgba(255,255,255,0.5);
+        padding: 5px 50px;
+        font-size: 20px;
+        font-weight: bold;
+        &[type="text"] {
+            padding: 5px 20px;
+            background: #fff;
+            color: black;
+            text-align: center;
+        }
+        &[type="button"] {
+            cursor: pointer;
+        }
+        &[disabled="disabled"], &:active {
+            background-color: rgb(98,90,88);
+            .linear-gradient(top, rgb(98,90,88) 0%, rgb(87,56,52) 100%);
+        }
+    }
+    
+    .highscore {
+        #highscores {
+            width: 250px;
+            min-height: 200px;
+            text-align: left;
+            margin: auto;
+            margin-top: 50px;
+            color: white;
+            font-family: 'Bangers';
+            font-size: 30px;
+            color: #faf;
+            span {
+                margin-right: 30px;
+                color: #aaf;
+            }
+        }
+    }
+    
+    .submitscore {
+        select {
+            font-size: 20px;
+        }
+    }
+    
+    .banner {
+        #add {
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            color: yellow;
+            font-family: 'Bangers';
+            font-size: 23px;
+            text-shadow: 2px 2px #000;
+            span {
+                font-size: 20px;
+                color: white;
+            }
+        }
+        img {
+            margin-top: 10px;
+            width: 200px;
+        }
+    }
+    
+    .ingame {
+        #lives {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: 'Bangers';
+            font-size: 20px;
+            color: @blue;
+            &.bump {
+                -webkit-transition: none;
+                font-size: 25px;
+            }
+        }
+        #points {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Bangers';
+            font-size: 20px;
+            color: @peach;
+            .transition(font-size 0.3s);
+            &.bump {
+                .transition(none);
+                font-size: 25px;
+            }
+        }
+        .burger {
+            width: 60px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            .transition(top 0.3s, left 0.3s, width 0.3s);
+            &.shrink {
+                width: 0px;
+                left: 30px;
+                top: 30px;
+            }
+        }
+        .cat {
+            position: absolute;
+            bottom: -10px;
+            left: 130px;
+            width: 80px;
+            .transition(bottom 0.3s);
+            &.jump {
+                .transition(none);
+                bottom: 0px
+            }
+        }
+    }
+        
+}
+
+/* Nice colors */
+@blue: rgb(124, 182, 231);
+@peach: rgb(245, 125,91);
+@lime: rgb(160, 197, 0);
+@fuschia: rgb(209, 91, 130);
+@white: rgb(220, 220, 220);
+@teal: rgb(0, 161, 205);
+@violet: rgb(130, 105, 188);
+@jade: rgb(61, 183, 136);
+
+/* Browser prefix templates */
+.opacity(@a) {
+    opacity: @a;
+    @ie-opacity: 100 * @a;
+    filter: e(%("alpha(opacity=%s)", @ie-opacity));
+}
+.border-radius(@a) {
+    -webkit-border-radius: @a;
+    -moz-border-radius: @a;
+    border-radius: @a;
+}
+.box-shadow(@a) {
+    -webkit-box-shadow: @a;
+    -moz-box-shadow: @a;
+    box-shadow: @a;
+}
+.box-shadow(@a, @b) {
+    -webkit-box-shadow: @a, @b;
+    -moz-box-shadow: @a, @b;
+    box-shadow: @a, @b;
+}
+.box-shadow(@a, @b, @c) {
+    -webkit-box-shadow: @a, @b, @c;
+    -moz-box-shadow: @a, @b, @c;
+    box-shadow: @a, @b, @c;
+}
+.radial-gradient(@a, @b, @c, @d) {
+    background-image: -webkit-radial-gradient(@a, @b, @c, @d);
+    background-image: -moz-radial-gradient(@a, @b, @c, @d);
+    background-image: -ms-radial-gradient(@a, @b, @c, @d);
+    background-image: -o-radial-gradient(@a, @b, @c, @d);
+    background-image: radial-gradient(@a, @b, @c, @d);
+}
+.linear-gradient(@a, @b, @c) {
+    background-image: -webkit-linear-gradient(@a, @b, @c);
+    background-image: -moz-linear-gradient(@a, @b, @c);
+    background-image: -ms-linear-gradient(@a, @b, @c);
+    background-image: -o-linear-gradient(@a, @b, @c);
+    background-image: linear-gradient(@a, @b, @c);
+}
+.transition(@a) {
+    -webkit-transition: @a;
+    -moz-transition: @a;
+    -o-transition: @a;
+    transition: @a;
+}
+.transition(@a, @b, @c) {
+    -webkit-transition: @a, @b, @c;
+    -moz-transition: @a, @b, @c;
+    -o-transition: @a, @b, @c;
+    transition: @a, @b, @c;
+}
+.background-size(@a) {
+    -webkit-background-size: @a;
+}
