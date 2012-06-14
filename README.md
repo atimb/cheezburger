@@ -7,6 +7,16 @@ This is an entry for [a CloudSpoke challenge](http://www.cloudspokes.com/challen
 
 Live presentation: http://cheezburger.herokuapp.com
 
+## Features
+
+* Our favorite cheezburger cat meme is finally arrived as a mobile game!
+* Game can be opened right from mobile browser (iPhone users should add it to their home screen for maximum experience, and
+there are in-game instructions for this)
+* Using Geolocation API for locating the nearest franchise location from salesforce records, score is submitted specifically to that store
+* Using W3C motion API for controlling the game (tilting the phone)
+* All kind of crazy CSS transforms
+* Leaderboard/High Score based on specific store location
+
 ## Configuration
 
 * `conf/config.json` contains all salesforce related OAuth2 credentials you need for basic setup

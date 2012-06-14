@@ -25,7 +25,7 @@ $(document).ready(function() {
     });
     
     // Handset location
-    var location = null;
+    var position = null;
     // Score
     var points = 0;
     // Handset acceleration sensor data
@@ -155,10 +155,10 @@ $(document).ready(function() {
         $.get('/api/locations', function(locations) {
             var fillSelect= function() {
                 // Sort according to GPS coord distance to user
-                if (location) {
+                if (position) {
                     locations.sort(function(a, b) {
-                        var distA = Math.pow(a.lat - location.lat, 2) + Math.pow(a.long - location.long, 2);
-                        var distB = Math.pow(b.lat - location.lat, 2) + Math.pow(b.long - location.long, 2);
+                        var distA = Math.pow(a.lat - position.lat, 2) + Math.pow(a.long - position.long, 2);
+                        var distB = Math.pow(b.lat - position.lat, 2) + Math.pow(b.long - position.long, 2);
                         return distA - distB;
                     });
                 }
@@ -167,9 +167,9 @@ $(document).ready(function() {
                 });
             }
             // Try to get physical coordinates
-            if (typeof(navigator.geolocation.getCurrentPosition) === 'function' && !location) {
+            if (typeof(navigator.geolocation.getCurrentPosition) === 'function' && !position) {
                 navigator.geolocation.getCurrentPosition(function(position){
-                    location = position.coords;
+                    position = position.coords;
                     fillSelect();
                 });
             } else {
