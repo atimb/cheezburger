@@ -30,6 +30,7 @@ the `/lib/salesforce-connector.js` file
 
 ## Deployment
 
+* Install necessary node.js libraries with `npm install`
 * Create heroku app with `heroku create app-name --stack cedar`, and deploy it with `git push`,
 it will be instantly available under a .herokuapp.com domain
 
