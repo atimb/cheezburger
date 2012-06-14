@@ -16,6 +16,7 @@ there are in-game instructions for this)
 * Using W3C motion API for controlling the game (tilting the phone)
 * All kind of crazy CSS transforms
 * Leaderboard/High Score based on specific store location
+* Tested on iPhone 4S, and Samsung Galaxy S2
 
 ## Configuration
 
