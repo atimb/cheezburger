@@ -3,7 +3,7 @@ Cheezburger
 
 HTML5 mobile web app game powered by Heroku and Salesforce
 
-This is an entry for [a CloudSpoke challenge](http://www.cloudspokes.com/challenges/1536).
+This is an entry for [a CloudSpokes challenge](http://www.cloudspokes.com/challenges/1536).
 
 Live presentation: http://cheezburger.herokuapp.com
 

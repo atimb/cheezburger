@@ -1,5 +1,5 @@
 {
-  "name": "burger-builder",
+  "name": "cheezburger",
   "version": "0.0.1",
   "engines": {
     "node": "0.6.11",
@@ -8,8 +8,7 @@
   "dependencies": {
     "node-salesforce": "0.3.0",
     "express": "2.5.8",
-    "socket.io": "0.9.5",
-    "jsonconfig": "0.3.0"
+    "socket.io": "0.9.5"
   },
   "devDependencies": {
   }
