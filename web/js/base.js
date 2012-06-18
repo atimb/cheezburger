@@ -3,9 +3,9 @@ $(document).ready(function() {
     // Display message that it is a mobile app
     if (navigator.userAgent.toLowerCase().indexOf('mobile') == -1) {
         alert('This is a mobile game.\nPlease open the URL from your Android Ice Cream Sandwich or (preferably) iPhone 4S !');
-        return;
+        //return;
     }
-    
+
 	// Display a message asking to add the app to the Home Screen
     if (navigator.userAgent.indexOf('iPhone') != -1) {
     	if (!navigator.standalone == true) {
@@ -14,28 +14,23 @@ $(document).ready(function() {
     	}
     }
     
-    // Try to hide the address bar
-    setTimeout(function () {
-      window.scrollTo(0, 1);
-    }, 1000);
-    
     // Prevent body scroll, to behave more native
     $('body').bind('touchmove', function() {
         event.preventDefault() ;
     });
-    
+
     // Handset location
     var position = null;
     // Score
     var points = 0;
     // Handset acceleration sensor data
     var acceleration = { x: 0, y: -10, z: 0 };
-    
+
     // Start collection
     window.ondevicemotion = function(event) {
         acceleration = event.accelerationIncludingGravity;
     };
-    
+
     // Bind touch/click events to buttons
     (function bindHandlers() {
         $('.burger').bind('touchend', showSubmitScore);
@@ -71,18 +66,29 @@ $(document).ready(function() {
         points = 0;
         
         var height = $('.cat').offset().top;
+        $('#points').html('Score: ' + points);
+        $('#lives').html('Lives: ' + lives);
+        setTimeout(function() {
+            $('#learn').fadeOut(1000);
+        }, 1500);
         
         lastTime = new Date().getTime();
         animate();
-    
+            
         // Check if new burger is needed, add if necessary
         function addBurger(dt) {
             nextBurger -= dt;
             if (nextBurger < 0) {
                 // new burger pops up
-                burgerz.push({ x: Math.random()*260, y: -50, vx: 0, vy: 0, m: 0.5 + Math.random(), id: burgerId });
-                $('<img id="burger-' + burgerId++ + '" src="img/burger.png" class="burger"/>').appendTo('#ingame');
-                nextBurger = Math.random()*2000 + 500;
+                var this_burger = { x: Math.random()*260, y: -50, vx: 0, vy: 0, m: 0.5 + Math.random(), id: burgerId };
+                var this_burgerId = burgerId++;
+                burgerz.push(this_burger);
+                $('<img id="burger-' + this_burgerId + '" src="img/burger.png" class="burger"/>').appendTo('#ingame');
+                // if tap on burger, flip it over
+                $('#burger-' + this_burgerId).bind('touchend', function() {
+                    this_burger.vy *= -1;
+                });
+                nextBurger = Math.random()*2000;
             }
         }
 
@@ -95,26 +101,43 @@ $(document).ready(function() {
            var newburgerz = [];
            // for all burger on the map
            burgerz.forEach(function(burger) {
-               // some simple physics
-               var angle = Math.atan(acceleration.x / acceleration.y) * 180 / Math.PI;
-               burger.vx = acceleration.x * dt * 0.001 / burger.m;
-               burger.vy = -acceleration.y * dt * 0.001  / burger.m;
+               // some simple physics (Newton II)
+               burger.vx += acceleration.x * dt * 0.0001 / burger.m;
+               burger.vy += -acceleration.y * dt * 0.0001  / burger.m;
                burger.x += dt * burger.vx;
                burger.y += dt * burger.vy;
+               // limit fall speed
+               var vector = burger.vx*burger.vx + burger.vy*burger.vy;
+               var max_speed = 0.05 / burger.m;
+               if (vector > max_speed) {
+                   burger.vx *= max_speed/vector;
+                   burger.vy *= max_speed/vector;
+               }
+               // limit position in game area
                if (burger.x < 0) {
                    burger.x = 0;
+                   burger.vx = 0;
                } else if (burger.x > 260) {
                    burger.x = 260;
+                   burger.vx = 0;
                }
+               // calculate burger angle
+               var angle = Math.atan(burger.vx / -burger.vy) * 180 / Math.PI;               
                // modify the DOM accordingly
                $('#burger-'+burger.id).css('-webkit-transform', 'translate('+burger.x+'px, '+burger.y+'px) rotate('+angle+'deg) scale('+burger.m+','+burger.m+')');
                // if burger touched the ground, remove it, decrease LIFES, some animation
                if (burger.y > height+100) {
                    $('#burger-'+burger.id).remove();
                    lives--;
+                   // if no life left, game over
                    if (lives === 0) {
-                       $('.burger').remove();
-                       showSubmitScore();
+                       $('.burger').fadeOut(1000);
+                       $('.cat').addClass('sink');
+                       setTimeout(function() {
+                           $('.cat').removeClass('sink');
+                           $('.burger').remove();
+                           showSubmitScore();
+                       }, 1500);
                    }
                    $('#lives').html('Lives: ' + lives).addClass('bump');
                    setTimeout(function() {
@@ -147,6 +170,8 @@ $(document).ready(function() {
         }
     }
     
+    var firstTime = true;
+    
     // Show the submit score panel
     function showSubmitScore() {
         $('#ingame').hide();
@@ -155,7 +180,9 @@ $(document).ready(function() {
         $('#score').html(points + ' points');
 
         // Retrieve accounts (locations)
-        $.get('/api/locations', function(locations) {
+        firstTime && $.get('/api/locations', function(locations) {
+            firstTime = false;
+            
             var fillSelect= function() {
                 // Sort according to GPS coord distance to user
                 if (position) {
@@ -168,7 +195,10 @@ $(document).ready(function() {
                 locations.forEach(function(el) {
                     $('<option/>', { 'value': el.id }).text(el.name).appendTo('#location');
                 });
+                $('#location-text').html('Select store location');
+                $('#location').css('opacity', '1');
             }
+            
             // Try to get physical coordinates
             if (typeof(navigator.geolocation.getCurrentPosition) === 'function' && !position) {
                 navigator.geolocation.getCurrentPosition(function(pos){
@@ -196,7 +226,7 @@ $(document).ready(function() {
             });
         });
     }
-    
+
 });
 
 // shim layer with setTimeout fallback

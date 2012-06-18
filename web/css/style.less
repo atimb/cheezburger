@@ -1,10 +1,7 @@
-body, div, span, p, h1, h2, h3, h4, h5, h6 {
+body, div, span, p, h1, h2, h3, h4, h5, h6, input {
+    font-family: 'Fredoka One';
     margin: 0;
     padding: 0;
-}
-
-section, article, footer {
-    display: block;
 }
 
 body {
@@ -27,26 +24,29 @@ body {
     }
     
     input {
-        background-color: rgb(198,90,88);
-        .linear-gradient(top, rgb(198,90,88) 0%, rgb(187,56,52) 100%);
+        background-color: rgb(44,122,190);
+        .linear-gradient(top, rgb(2,163,218) 0%, rgb(44,122,190) 100%);
         .border-radius(10px);
-        color: #fff;
         border: 3px solid rgba(255,255,255,0.5);
-        padding: 5px 50px;
         font-size: 20px;
         font-weight: bold;
         &[type="text"] {
-            padding: 5px 20px;
+            padding: 5px 0px;
             background: #fff;
             color: black;
             text-align: center;
         }
         &[type="button"] {
+            .box-shadow(inset -2px -2px 0px rgba(0,0,0,0.5), inset 2px 2px 0px rgba(255,255,255,0.2));
+            color: #fff;
+            padding: 5px 50px;
+            font-size: 25px;
             cursor: pointer;
         }
         &[disabled="disabled"], &:active {
-            background-color: rgb(98,90,88);
-            .linear-gradient(top, rgb(98,90,88) 0%, rgb(87,56,52) 100%);
+            .box-shadow(inset 2px 2px 0px rgba(0,0,0,0.5), inset -2px -2px 0px rgba(255,255,255,0.2));
+            background-color: rgb(44,122,190);
+            .linear-gradient(top, rgb(2,163,218) 0%, rgb(44,122,190) 100%);
         }
     }
     
@@ -75,24 +75,40 @@ body {
     }
     
     .banner {
-        #add {
-            width: 100%;
-            text-align: center;
-            position: fixed;
-            bottom: 0px;
-            left: 0px;
+        img {
+            margin-top: 10px;
+            width: 200px;
+        }
+    }
+    
+    .tip {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        h3 {
+            width: 90%;
+            margin: auto;
+            background-color: rgba(0,0,0,0.6);
+            .border-radius(10px);
+            border: 2px solid rgba(0,0,0,0.6);
             color: yellow;
-            font-family: 'Bangers';
-            font-size: 23px;
+            font-size: 20px;
             text-shadow: 2px 2px #000;
+            padding: 5px 10px;
             span {
                 font-size: 20px;
                 color: white;
             }
         }
-        img {
-            margin-top: 10px;
-            width: 200px;
+        .down-arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-top: 15px solid rgba(0,0,0,0.8);
+            border-right: 15px solid transparent;
         }
     }
     
@@ -104,8 +120,9 @@ body {
             font-family: 'Bangers';
             font-size: 20px;
             color: @blue;
+            .transition(font-size 0.3s);
             &.bump {
-                -webkit-transition: none;
+                .transition(none);
                 font-size: 25px;
             }
         }
@@ -144,6 +161,12 @@ body {
                 .transition(none);
                 bottom: 0px
             }
+            &.sink {
+                bottom: -120px;
+            }
+        }
+        .tip {
+            bottom: 5px;
         }
     }
         

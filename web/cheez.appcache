@@ -1,0 +1,16 @@
+CACHE MANIFEST
+# 2012-06-17:v6
+
+CACHE:
+index.html
+/css/style.less
+/js/less-1.2.1.min.js
+/js/base.js
+/img/burger.png
+/img/cat.png
+/img/red-bg.jpg
+http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js
+http://fonts.googleapis.com/css?family=Bangers|Fredoka+One
+
+NETWORK:
+*
