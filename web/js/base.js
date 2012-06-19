@@ -35,7 +35,7 @@ $(document).ready(function() {
     (function bindHandlers() {
         $('.burger').bind('touchend', showSubmitScore);
         $('#play').bind('touchend', showInGame);
-        $('#replay').bind('touchend', showInGame);
+        $('#replay,#tryagain').bind('touchend', showInGame);
         $('#submit').bind('touchend', function() {
             $('#submit').attr('disabled', 'disabled');
             if ($('#nickname').val() === '') {
@@ -51,6 +51,7 @@ $(document).ready(function() {
     function showInGame() {
         $('#banner').hide();
         $('#highscore').hide();
+        $('#submitscore').hide();
         $('#ingame').show();
         startGame();
     };
@@ -210,7 +211,7 @@ $(document).ready(function() {
             } 
         });
     };
-    
+
     // Show the high score panel
     function showHighScore() {
         $('#submitscore').hide();

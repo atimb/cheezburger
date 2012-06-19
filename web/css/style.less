@@ -24,8 +24,6 @@ body {
     }
     
     input {
-        background-color: rgb(44,122,190);
-        .linear-gradient(top, rgb(2,163,218) 0%, rgb(44,122,190) 100%);
         .border-radius(10px);
         border: 3px solid rgba(255,255,255,0.5);
         font-size: 20px;
@@ -37,6 +35,8 @@ body {
             text-align: center;
         }
         &[type="button"] {
+            background-color: rgb(44,122,190);
+            .linear-gradient(top, rgb(2,163,218) 0%, rgb(44,122,190) 100%);
             .box-shadow(inset -2px -2px 0px rgba(0,0,0,0.5), inset 2px 2px 0px rgba(255,255,255,0.2));
             color: #fff;
             padding: 5px 50px;
@@ -45,8 +45,6 @@ body {
         }
         &[disabled="disabled"], &:active {
             .box-shadow(inset 2px 2px 0px rgba(0,0,0,0.5), inset -2px -2px 0px rgba(255,255,255,0.2));
-            background-color: rgb(44,122,190);
-            .linear-gradient(top, rgb(2,163,218) 0%, rgb(44,122,190) 100%);
         }
     }
     
@@ -71,6 +69,12 @@ body {
     .submitscore {
         select {
             font-size: 20px;
+        }
+        #tryagain {
+            padding: 5px 35px;
+            font-size: 20px;
+            background-color: rgb(232,113,80);
+            .linear-gradient(top, rgb(243,125,91) 0%, rgb(232,113,80) 100%);
         }
     }
     
